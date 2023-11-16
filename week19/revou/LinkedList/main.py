@@ -7,25 +7,43 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
-    def insert(self, values):
-        # insert your code here
-        return
+    def insert(self, value):
+       new_node = Node(value)
+       if self.head is None:
+           self.head = new_node
+       else:
+           last_node = self.head
+           while last_node.next:
+               last_node = last_node.next
+           last_node.next = new_node
 
-    def delete(self, values):
-        # insert your code here
-        return 
+    def delete(self, value):
+       if self.head is None:
+           return
+       if self.head.value == value:
+           self.head = self.head.next
+           return
+       current_node = self.head
+       while current_node.next:
+           if current_node.next.value == value:
+               current_node.next = current_node.next.next
+               return
+           current_node = current_node.next
 
-    def display(self, values):
-        # insert your code here
-        return
+    def display(self):
+       values = []
+       current_node = self.head
+       while current_node:
+           values.append(str(current_node.value))
+           current_node = current_node.next
+       return "->".join(values) + "->None"
 
-def linked_list_function(list, deleted_node):
+def linked_list_function(values, deleted_node):
    ll = LinkedList()
-   ll.insert(list)
-
+   for value in values:
+       ll.insert(value)
    ll.delete(deleted_node)
-
    return ll.display()
 
-result = linked_list_function(list=[1, 2, 3, 2, 4], deleted_node=2)
-print(result)                     
+result = linked_list_function(values=[1, 2, 3, 2, 4], deleted_node=2)
+print(result)                
